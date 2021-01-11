@@ -43,6 +43,13 @@ div.tooltip {
 	overflow: auto;
 }
 
+.bibLabel {
+	font-size: 10pt;
+	font-family: 'Open Sans';
+	color: blue;
+	overflow: auto;
+}
+
 .citation {
 	width: 40%;
 	margin-right:8%;

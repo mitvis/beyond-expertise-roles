@@ -16,17 +16,17 @@ var objectives = [ 'O1', 'O2', 'O3',
 var tasks = ['T1', 'T2', 'T3', 'T4', 'T5']
 
 var labels = {
-	'Stakeholders-Not-Specified': 'not explicitly specified',
+	'Stakeholders-Not-Specified': 'knowledge not explicitly specified',
 	'G1': 'G1: understanding', 
 	'G2': 'G2: trust',
-	'Goal-Not-Specified': 'not explicitly specified',
+	'Goal-Not-Specified': 'goal not explicitly specified',
 	'O1': 'O1: justify actions based on output',
 	'O2': 'O2: understand how to incorporate output', 
 	'O3': 'O3: debug or improve',
 	'O4': 'O4: contest decision',
 	'O5': 'O5: compliance w/ regulations',
 	'O6': 'O6: understand data usage',
-	'Obj-Not-Specified': 'not explicitly specified',
+	'Obj-Not-Specified': 'obj. not explicitly specified',
 	'O7': 'O7: learn about domain',
 	'T1': 'T1: assess prediction reliability', 
 	'T2': 'T2: detect discrimination/mistake',
@@ -195,6 +195,7 @@ d3.json("node_link_data.json").then(function(data) {
 	    }
 
 	    $(".bibItem").remove()
+	    $(".bibLabel").html("")
 	    $(`.${d.name}`).css('opacity', 1)
 	    $(`circle.${d.name}`).css('stroke', 'black')
 
@@ -230,6 +231,9 @@ d3.json("node_link_data.json").then(function(data) {
             	return d.paper_list.indexOf(item.index) > -1 
             })
 
+            var labelText = $(`text.${d['name']}`).text()
+            $(".bibLabel").html(`for ${labelText}`)
+
 			for (var b = 0; b < selectedPapers.length; b++) {
 				var item = selectedPapers[b]
 				var snippet = ""
@@ -256,6 +260,7 @@ d3.json("node_link_data.json").then(function(data) {
 		$("circle").css("opacity", circleOrigOpacity).css('stroke', 'none')
 		$(".label").css("opacity", textOrigOpacity)
 		$(".bibItem").remove()
+		$(".bibLabel").html("")
 		d3.select(".selectedLines").selectAll("line").remove()
 		div.html("")
 		div.transition()		
@@ -267,6 +272,7 @@ d3.json("node_link_data.json").then(function(data) {
 
 $(".papersList").append(
 	"<div style='font-family: Open Sans;'>papers & snippets</div>")
+$(".papersList").append("<div class='bibLabel'></div>")
 $(".papersList").append("<div class='papersListInner'></div>")
 
 for (var b = 0; b < bib.length; b++) {
