@@ -41,6 +41,11 @@ var colors = [
 	'lightpink'
 ]
 
+var rowColors = [
+	'#F0F0F0',
+	'#E0E0E0'
+]
+
 var labelSvg = d3.select(".wrapper")
     .append("svg")
     .attr("width", WIDTH + "px")
@@ -178,7 +183,9 @@ d3.json("node_link_data.json").then(function(data) {
       	} else {
       		return d.name
       	}
-      }) 
+      }).on("mouseover", handleMouseOver)
+      .on("mouseout", handleMouseOut)
+      .on("click", handleClick) 
 
     clicked = false;
 
@@ -242,7 +249,7 @@ d3.json("node_link_data.json").then(function(data) {
 				}
 
 				$(".papersListInner").append(
-					`<div class='bibItem'>
+					`<div class='bibItem' style='background-color:${rowColors[(b%2)]}'>
 						<div class='citation'>
 						[${item['index']}] ${item['author']} (${item['year']}). ${item['title']}.
 						</div>
