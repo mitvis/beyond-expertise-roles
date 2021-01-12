@@ -24,6 +24,24 @@ div.tooltip {
     pointer-events: none;			
 }
 
+.checkboxDiv {
+	font-family: 'Roboto Slab', serif;
+	font-size: 9pt;
+	color: grey;
+}
+
+.checkboxDiv label {
+  display: inline-block;
+  padding-right: 10px;
+  white-space: nowrap;
+}
+.checkboxDiv input {
+  vertical-align: top;
+}
+.checkboxDiv label span {
+  vertical-align: middle;
+}
+
 .snippet {
 	margin-bottom: 3px;
 }

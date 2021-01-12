@@ -1,9 +1,9 @@
 console.log("here")
 
-const WIDTH = 1000
+const WIDTH = 1100
 const HEIGHT = 400
 const LABELHEIGHT = 30
-const margin = {left: 20, right: 200, top: 20, bottom: 20}
+const margin = {left: 20, right: 300, top: 20, bottom: 20}
 
 var categories = ['knowledge', 'goals', 'objectives', 'tasks']
 var categoryLabels = ['knowledge-contexts', 'goals', 'objectives', 'tasks']
@@ -20,19 +20,19 @@ var labels = {
 	'G1': 'G1: understanding', 
 	'G2': 'G2: trust',
 	'Goal-Not-Specified': 'goal code undetermined',
-	'O1': 'O1: justify actions based on output',
-	'O2': 'O2: understand how to incorporate output', 
-	'O3': 'O3: debug or improve',
-	'O4': 'O4: contest decision',
-	'O5': 'O5: compliance w/ regulations',
-	'O6': 'O6: understand data usage',
+	'O4': 'O4: justify actions based on output',
+	'O3': 'O3: understand how to incorporate output', 
+	'O1': 'O1: debug or improve',
+	'O7': 'O7: contest decision',
+	'O2': 'O2: compliance w/ regulations',
+	'O5': 'O5: understand data usage',
 	'Obj-Not-Specified': 'obj. code undetermined',
-	'O7': 'O7: learn about domain',
+	'O6': 'O6: learn about domain',
 	'T1': 'T1: assess prediction reliability', 
 	'T2': 'T2: detect discrimination/mistake',
-	'T3': 'T3: understand model strengths/limitations',
-	'T4': 'T4: understand features used',
-	'T5': 'T5: understand influence of features'
+	'T5': 'T5: understand model strengths/limitations',
+	'T3': 'T3: understand features used',
+	'T4': 'T4: understand influence of features'
 }
 
 var colors = [
@@ -63,6 +63,21 @@ var svg = d3.select(".wrapper")
     .append("svg")
     .attr("width", WIDTH + "px")
     .attr("height", HEIGHT + "px");
+
+d3.select(".wrapper").append("div").attr("class", "checkboxDiv")
+$(".checkboxDiv").html(`
+	<input type="checkbox" id="showAllNodes" name="showAllNodes"
+         checked>
+  	<label for="showAllNodes">show connections to/from other nodes in same level on hover</label>
+`)
+
+$("#showAllNodes").change(function() {
+    if(this.checked) {
+        $(".checkboxDiv label").css("opacity", 1)
+    } else {
+    	$(".checkboxDiv label").css("opacity", 0.5)
+    }
+});
 
 var papersDiv = d3.select(".wrapper")
 				  .append("div")
@@ -96,7 +111,7 @@ labelSvg.selectAll("text")
 
 $(".titleDiv").html(`
 	<div class='title'>A Framework for Characterizing Stakeholders of Interpretable ML 
-	by their Knowledge & Needs: Descriptive Power</div>
+	and their Needs: Descriptive Power</div>
 	<div class='subtitle'><i>about this figure</i></div>
 `)
 
@@ -269,6 +284,21 @@ d3.json("node_link_data.json").then(function(data) {
 	    var filteredData = links.filter(function(itm){
 		  return d.paper_list.indexOf(itm.paper) > -1;
 		});
+
+	    if (!($('#showAllNodes').is(":checked"))) {
+	    	filteredData = filteredData.filter(function(itm){
+	    		var sourceCategory = categories[itm.level]
+	    		var targetCategory = categories[itm.level + 1]
+	    		if (sourceCategory == d.category) {
+	    			return d.name == itm.source 
+	    		} else if (targetCategory == d.category) {
+	    			return d.name == itm.target
+	    		} else {
+	    			return true
+	    		}
+			});
+	    }
+
 	    var aggFilteredData = aggregateLinks(filteredData)
 	    d3.select(".selectedLines")
 		   .selectAll("line")
@@ -289,8 +319,6 @@ d3.json("node_link_data.json").then(function(data) {
 		    	var scale = scaleDict[categories[d.level + 1]]
 		    	return scale(d.target)
 		   })
-
-		 
 
             var selectedPapers = bib.filter(function(item) {
             	return d.paper_list.indexOf(item.index) > -1 
