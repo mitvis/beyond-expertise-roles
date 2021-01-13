@@ -249,7 +249,7 @@ d3.json("node_link_data.json").then(function(data) {
       .attr("y", d => scaleDict[d.category](d.name))
       .attr("dx", "0.75em")
       .attr("dy", "0.33em")
-      .style("font-size", 11)
+      .style("font-size", 12)
       .style("opacity", textOrigOpacity)
       .style("z-index", 1000)
       .text(function(d) {
