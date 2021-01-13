@@ -117,6 +117,7 @@ $(".titleDiv").html(`
 
 $(".modal-text").html(`
 	<div class='aboutText'>
+	<h3>About</h3>
 	<p>This is an interactive figure that is part of the following paper:</p>
 	<p style='color:grey;'>Suresh, Harini; Gomez, Steven R.; Nam, Kevin K.; Satyanarayan, Arvind. 2021. 
 	Beyond Expertise and Roles: A Framework for Characterizing Stakeholders of Interpretable 
@@ -137,6 +138,15 @@ $(".modal-text").html(`
 	that contain that code. Below, the papers and any corresponding snippets of that code appear.  To scroll through 
 	and list of papers, click on the node and the paper list will remain up.</p>
 	</div>
+
+	<h3>Acknowledgements</h3>
+	<p>This research was sponsored by NSF Award #1900991, and by the United States Air Force 
+	Research Laboratory under Cooperative Agreement Number FA8750-19-2-1000. 
+	The views and conclusions contained in this document are those of the authors and should 
+	not be interpreted as representing the official policies, either expressed or implied, 
+	of the United States Air Force or the U.S. Government. The U.S. Government is authorized to 
+	reproduce and distribute reprints for Government purposes notwithstanding any copyright notation 
+	herein.</p>
 `)
 
 
