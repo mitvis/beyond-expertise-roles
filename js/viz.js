@@ -110,7 +110,7 @@ labelSvg.selectAll("text")
         .style("font-family", "Open Sans")
 
 $(".titleDiv").html(`
-	<div class='title'>A Framework for Characterizing Stakeholders of Interpretable ML 
+	<div class='title'>A Framework to Characterize the Stakeholders of Interpretable ML 
 	and their Needs: Descriptive Power</div>
 	<div class='subtitle'><i>about this figure</i></div>
 `)
