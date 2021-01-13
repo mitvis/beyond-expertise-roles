@@ -194,7 +194,7 @@ function aggregateLinks(linkData) {
 var links;
 var nodes;
 var clicked; 
-d3.json("node_link_data.json").then(function(data) {
+d3.json("data/node_link_data.json").then(function(data) {
 	console.log(data)
 
 	nodes = data['nodes']
